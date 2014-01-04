@@ -79,22 +79,21 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.6/howto/static-files/
-
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.abspath(os.path.join(
-    BASE_DIR,
-    'static'
-))
-
 # Medusa
 MEDUSA_RENDERER_CLASS = "django_medusa.renderers.DiskStaticSiteRenderer"
 MEDUSA_MULTITHREAD = True
 MEDUSA_DEPLOY_DIR = os.path.abspath(os.path.join(
     BASE_DIR,
-    'static'
+    'public'
+))
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.6/howto/static-files/
+
+STATIC_URL = '/s/'
+STATIC_ROOT = os.path.abspath(os.path.join(
+    MEDUSA_DEPLOY_DIR,
+    's'
 ))
 
 # Crispy
