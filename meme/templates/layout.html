@@ -1,8 +1,48 @@
+{% load bootstrap3 %}
 <html>
 <head>
 	<title>{% block title %}{% endblock %}</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	{% bootstrap_css %}
+	<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ubuntu:400,700">
+	<link rel="stylesheet" href="{{STATIC_URL}}s.css">
+	<!--[if lt IE 9]>
+	<script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	<script src="//oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+	<![endif]-->
 </head>
 <body>
-{% block content %}{% endblock %}
+	<a href="#content" class="sr-only">Skip to main content</a>
+	<div class="header">
+		<div id="logo" class="container narrow">
+			<img src="{{STATIC_URL}}l.png">
+			<span>Confederación Pirata</span>
+		</div>
+	</div>
+	<div id="wrap">
+		<div id="content" class="container narrow">
+			<div class="page-header">
+				<h1>#SeBuscanPiratas</h1>
+			</div>
+			{% block hero %}
+			<div class="jumbotron">
+				<p>¿Quieres construir una nueva Unión Europea? Buscamos gente como tú. ¡Únete a la candidatura europea de la <a href="https://confederacionpirata.org">Confederación Pirata</a>!
+				<p>Para ello, debes darte de alta como simpatizante y podrás votar a partir del 23 de Enero. Si quieres ser candidato, marca la casilla y sigue los pasos adicionales.</p>
+<p>¡Tienes hasta el 22 de Enero!</p>
+			</div>
+			{% endblock %}
+			<div>
+			{% block content %}{% endblock %}
+			</div>
+		</div>
+	</div>
+	<div id="footer">
+		<div class="container">
+			<p class="text-muted"><a href="https://confederacionpirata.org">Confederación Pirata</a> - 2014</p>
+		</div>
+	</div>
+	<script src="//code.jquery.com/jquery.js"></script>
+	{% bootstrap_javascript %}
 </body>
 </html>
