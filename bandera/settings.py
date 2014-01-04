@@ -95,3 +95,7 @@ MEDUSA_DEPLOY_DIR = os.path.abspath(os.path.join(
     BASE_DIR,
     'static'
 ))
+
+# Crispy
+CRISPY_FAIL_SILENTLY = not DEBUG
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
