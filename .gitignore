@@ -94,3 +94,4 @@ $RECYCLE.BIN/
 /public
 db.sqlite3
 /upload
+custom_settings.py
