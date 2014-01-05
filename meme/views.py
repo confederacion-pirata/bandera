@@ -45,7 +45,7 @@ def get_thanks_destination():
 def get_candidate_destination():
 	if settings.DEBUG:
 		return reverse('candidate')
-	return 'http://piratas2014.eu/api/bandera/candidate'
+	return 'http://piratas2014.eu/bandera/api/candidate'
 
 def send_confirmation_email():
 	pass
