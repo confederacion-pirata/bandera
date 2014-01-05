@@ -1,3 +1,5 @@
 from django.contrib import admin
+from meme.models import Supporter, Candidate
 
-# Register your models here.
+admin.site.register(Supporter)
+admin.site.register(Candidate)
