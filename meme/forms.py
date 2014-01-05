@@ -6,7 +6,7 @@ from django.core.urlresolvers import reverse
 import hashlib
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
+from crispy_forms.layout import Submit, Hidden
 
 default_errors = {
     'required': 'Este campo es necesario.',
@@ -65,7 +65,7 @@ class SupporterForm(forms.Form):
 		error_messages=default_errors,
 	)
 	ok_tos = forms.BooleanField(
-		label = 'Acepto la <a href="/privacy">política de privacidad</a> y que paso a ser simpatizante registrado de la Confederación Pirata (<a href="/tos">condiciones</a>).',
+		label = 'Acepto la <a href="/privacy">política de privacidad</a>, mi alta como simpatizante registrado de la Confederación Pirata y que mis datos sean transferidos al partido pirata de mi zona, si lo hay, para ser simpatizante de éste también (<a href="/tos">condiciones</a>).',
 		help_text = 'Para ejercer tus derechos LOPD contáctanos en <a href="http://confederacionpirata.org/contacto/">contacto@confederacionpirata.org</a>.',
 		required = True,
 		error_messages=default_errors,
@@ -90,11 +90,12 @@ class SupporterForm(forms.Form):
 			region = self.cleaned_data['region'],
 			ok_candidate = self.cleaned_data['ok_candidate'],
 			ok_tos = self.cleaned_data['ok_tos'],
+			confirmed = False,
 			scanned_id = self.cleaned_data['scanned_id'],
-			csrf = self.data['csrfmiddlewaretoken'],
 		)
-		supporter.token = hashlib.md5(supporter.email + self.data['csrfmiddlewaretoken'] + settings.SECRET_KEY).hexdigest()
+		supporter.token = hashlib.md5(supporter.email + settings.SECRET_KEY).hexdigest()
 		supporter.save()
+		return supporter
 
 	def clean_email(self):
 		if Supporter.objects.filter(email__iexact=self.cleaned_data['email']):
@@ -111,9 +112,14 @@ class CandidateForm(forms.Form):
 		),
 		required = True,
 	)
+	email = forms.EmailField(
+		label = 'Introduce de nuevo tu correo electrónico (verificación)',
+		max_length = 75,
+		required = True,
+		error_messages=default_errors,
+	)
 	bio = forms.CharField(
 		label = 'Cuéntanos sobre ti: biografía, motivos y vinculación con el movimiento pirata (máx. 1400)',
-		min_length = 140,
 		max_length = 1400,
 		widget=forms.Textarea,
 		required = True,
@@ -152,7 +158,16 @@ class CandidateForm(forms.Form):
 		self.helper.form_enctype = 'multipart/form-data'
 		self.helper.add_input(Submit('go', '¡Adelante!'))
 
+	def set_token(self, token):
+		self.helper.add_input(Hidden('token', token))
+
 	def save(self):
+		token = self.data['token']
+		supporter = Supporter.objects.filter(token__iexact=token)
+		if not supporter:
+			raise forms.ValidationError('Error interno 0x0A. Contacta con contacto@confederacionpirata.org.')
+		if Candidate.objects.filter(supporter__iexact=supporter):
+			raise forms.ValidationError('Error interno 0x0B. Contacta con contacto@confederacionpirata.org.')
 		candidate = Candidate(
 			supporter = supporter[0],
 			phase = self.cleaned_data['phase'],
@@ -163,9 +178,9 @@ class CandidateForm(forms.Form):
 			photo = self.cleaned_data['photo'],
 		)
 		candidate.save()
+		return candidate
 
-	def clean(self):
-		if not Supporter.objects.filter(csrf__iexact=self.data['csrfmiddlewaretoken']):
-			raise forms.ValidationError('Error interno 0x0A. Contacta con contacto@confederacionpirata.org.')
-		if Candidate.objects.filter(supporter=supporter):
-			raise forms.ValidationError('Error interno 0x0B. Contacta con contacto@confederacionpirata.org.')
+	def clean_email(self):
+		token = hashlib.md5(self.cleaned_data['email'] + settings.SECRET_KEY).hexdigest()
+		if token != self.data['token']:
+			raise forms.ValidationError('Esta no es la dirección que has introducido en el paso anterior. Introduce la correcta, por favor.')
