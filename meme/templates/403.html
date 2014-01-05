@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Operación no permitida - Primarias abiertas Elecciones Europeas 2014 | Confederación Pirata{% endblock %}
+{% block hero %}
+<h1>Error 403</h1>
+<h2>Operación no permitida</h2>
+<p>La operación que has intentado no es posible. Por favor, <a href="{% url 'index' %}">vuelve al inicio.</a></p>
+{% endblock %}
+{% block content %}
+<p>Si no sabes cómo llegaste aquí, contáctanos en <a href="http://confederacionpirata.org/contacto/">contacto@confederacionpirata.org</a>.</p>
+{% include 'guide.html' %}
+{% endblock %}

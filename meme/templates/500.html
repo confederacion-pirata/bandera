@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Error interno - Primarias abiertas Elecciones Europeas 2014 | Confederación Pirata{% endblock %}
+{% block hero %}
+<h1>Error 500</h1>
+<h2>Vaya, ¡algo ha ido mal!</h2>
+<p>Por favor, <a href="{% url 'index' %}">vuelve al inicio.</a> y <a href="http://www.confederacionpirata.org/contacto">contáctanos</a> explicando qué has hecho para llegar a este error.</p>
+{% endblock %}
+{% block content %}
+{% include 'guide.html' %}
+{% endblock %}
