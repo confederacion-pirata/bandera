@@ -5921,9 +5921,9 @@ body {
 .header {
   height: 200px;
   background-color: #eee;
-  background-image: url('/s/h.png');
-  background-repeat: repeat-x;
-  background-position: left bottom;
+  background-image: url('/s/h.png'), url('/s/i.png');
+  background-repeat: repeat-x, no-repeat;
+  background-position: -100% bottom, 70% bottom;
   width: 100%;
 }
 #wrap {
