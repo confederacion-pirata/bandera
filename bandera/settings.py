@@ -79,6 +79,12 @@ USE_L10N = True
 
 USE_TZ = True
 
+# Upload
+MEDIA_ROOT = os.path.abspath(os.path.join(
+    BASE_DIR,
+    'upload'
+))
+
 # Medusa
 MEDUSA_RENDERER_CLASS = "django_medusa.renderers.DiskStaticSiteRenderer"
 MEDUSA_MULTITHREAD = True
