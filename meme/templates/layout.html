@@ -16,8 +16,8 @@
 	<a href="#content" class="sr-only">Skip to main content</a>
 	<div class="header">
 		<div id="logo" class="container narrow">
-			<img src="{{STATIC_URL}}l.png">
-			<span>Confederación Pirata</span>
+			<a href="{% url 'index' %}"><img src="{{STATIC_URL}}l.png"></a>
+			<span class="hidden-xs"><a href="{% url 'index' %}">Confederación Pirata</a></span>
 		</div>
 	</div>
 	<div id="wrap">
@@ -27,9 +27,6 @@
 			</div>
 			<div class="jumbotron">
 				{% block hero %}
-				<p>¿Quieres construir una nueva Unión Europea? Buscamos gente como tú. ¡Únete a la candidatura europea de la <a href="https://confederacionpirata.org">Confederación Pirata</a>!
-				<p>Para ello, debes darte de alta como simpatizante y podrás votar a partir del 23 de Enero. Si quieres ser candidato, marca la casilla y sigue los pasos adicionales.</p>
-<p>¡Tienes hasta el 22 de Enero!</p>
 				{% endblock %}
 			</div>
 			<div>

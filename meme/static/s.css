@@ -5967,3 +5967,20 @@ body {
   font-weight: 500;
   padding-left: 1em;
 }
+#logo span.hidden-xs {
+	display: inline !important;
+}
+@media (max-width: 767px) {
+	#logo span.hidden-xs {
+		display: none !important;
+	}
+	#content {
+		padding: 0 1.5em 1em;
+	}
+	#content .page-header h1 {
+		font-size: 18px;
+	}
+	#content .jumbotron {
+		font-size: 14px;
+	}
+}
