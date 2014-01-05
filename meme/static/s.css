@@ -5984,3 +5984,10 @@ body {
 		font-size: 14px;
 	}
 }
+#accounts, #shareme {
+	text-align: center;
+}
+.sharrre .button {
+	float: left;
+	width: 60px;
+}
