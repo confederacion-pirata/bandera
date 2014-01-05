@@ -92,3 +92,5 @@ $RECYCLE.BIN/
 
 # Bandera
 /public
+db.sqlite3
+/upload
