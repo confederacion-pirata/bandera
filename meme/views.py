@@ -10,7 +10,7 @@ from forms import SupporterForm, CandidateForm
 from models import Supporter
 
 def index(request):
-	return render(request, 'index.html', {'form': SupporterForm()})
+	return render(request, 'index.html', {'form': SupporterForm(), 'request': request})
 
 def supporter(request):
 	if request.method == 'POST':
@@ -21,7 +21,7 @@ def supporter(request):
 				return HttpResponseRedirect('%s?token=%s' % (reverse('candidate'), supporter.token))
 			send_confirmation_email(supporter)
 			return HttpResponseRedirect(get_thanks_destination())
-		return render(request, 'index.html', {'form': form})
+		return render(request, 'index.html', {'form': form, 'request': request})
 	return HttpResponseRedirect('http://piratas2014.eu/')
 
 def candidate(request):
@@ -39,7 +39,7 @@ def candidate(request):
 	if not token:
 		return PermissionDenied
 	form.set_token(token)
-	return render(request, 'candidate.html', {'form': form})
+	return render(request, 'candidate.html', {'form': form, 'request': request})
 
 def confirm(request, token = None):
 	if not token:
@@ -50,10 +50,10 @@ def confirm(request, token = None):
 	data = supporter[0]
 	data.confirmed = True
 	data.save()
-	return render(request, 'confirm.html')
+	return render(request, 'confirm.html', {'request': request})
 
 def thanks(request):
-	return render(request, 'thanks.html', {})
+	return render(request, 'thanks.html', {'request': request})
 
 def get_thanks_destination():
 	if settings.DEBUG:

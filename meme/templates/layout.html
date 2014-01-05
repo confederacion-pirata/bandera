@@ -1,9 +1,15 @@
 {% load bootstrap3 %}
-<html>
+<html prefix="og: http://ogp.me/ns#">
 <head>
 	<title>{% block title %}{% endblock %}</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="apple-touch-icon" href="//confederacionpirata.org/wp-content/themes/Confederado/apple-touch-icon.png">
+	<link rel="shortcut icon" href="//confederacionpirata.org/wp-content/themes/Confederado/favicon.ico">
+	<meta property="og:type" content="website">
+	<meta property="og:image" content="{{STATIC_URL}}l.png">
+	<meta property="og:url" content="{{request.path}}">
+	<meta property="og:description" content="Participa en las primarias abiertas de la Confederación Pirata. ¡Puedes incluso ser candidato!">
 	{% bootstrap_css %}
 	<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ubuntu:400,700">
 	<link rel="stylesheet" href="{{STATIC_URL}}s.css">
