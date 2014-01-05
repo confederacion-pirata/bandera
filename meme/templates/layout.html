@@ -8,7 +8,7 @@
 	<link rel="shortcut icon" href="//confederacionpirata.org/wp-content/themes/Confederado/favicon.ico">
 	<meta property="og:type" content="website">
 	<meta property="og:image" content="{{STATIC_URL}}l.png">
-	<meta property="og:url" content="{{request.path}}">
+	<meta property="og:url" content="{{ request.build_absolute_uri }}">
 	<meta property="og:description" content="Participa en las primarias abiertas de la Confederación Pirata. ¡Puedes incluso ser candidato!">
 	{% bootstrap_css %}
 	<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ubuntu:400,700">
