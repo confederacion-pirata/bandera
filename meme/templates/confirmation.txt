@@ -1,0 +1,16 @@
+{% autoescape off %}
+Hola pirata,
+
+Gracias por registrarte en las primarias europeas de la Confederación Pirata.
+
+https://confederacionpirata.org/api/supporter/confirm/{{ hsh }}
+
+Juntos construiremos una nueva Unión Europea al servicio de las personas. En los próximos días recibirás otro correo con un enlace para acceder al sistema seguro de votación.
+
+Saludos,
+
+Confederación Pirata
+https://confederacionpirata.org
+https://twitter.com/partidos_pirata
+https://www.facebook.com/ConfederacionPirata
+{% endautoescape %}
