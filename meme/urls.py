@@ -7,6 +7,9 @@ urlpatterns = patterns('',
 	url(r'^api/supporter', views.supporter, name='supporter'),
 	url(r'^api/candidate', views.candidate, name='candidate'),
 	url(r'^thanks$', views.thanks, name='thanks'),
+	url(r'^manifesto$', views.manifesto, name='manifesto'),
+	url(r'^privacy$', views.privacy, name='privacy'),
+	url(r'^tos$', views.tos, name='tos'),
 )
 handler403 = 'meme.views.custom_403'
 handler404 = 'meme.views.custom_404'

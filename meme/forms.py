@@ -2,6 +2,7 @@
 from django import forms
 from bandera import settings
 from meme.models import Supporter, Candidate
+from django.core.urlresolvers import reverse
 import hashlib
 
 from crispy_forms.helper import FormHelper
@@ -64,7 +65,8 @@ class SupporterForm(forms.Form):
 		error_messages=default_errors,
 	)
 	ok_tos = forms.BooleanField(
-		label = 'Acepto la <a href="/privacidad">política de privacidad</a> y que paso a ser simpatizante registrado de la Confederación Pirata (<a href="/condiciones">condiciones</a>).',
+		label = 'Acepto la <a href="/privacy">política de privacidad</a> y que paso a ser simpatizante registrado de la Confederación Pirata (<a href="/tos">condiciones</a>).',
+		help_text = 'Para ejercer tus derechos LOPD contáctanos en <a href="http://confederacionpirata.org/contacto/">contacto@confederacionpirata.org</a>.',
 		required = True,
 		error_messages=default_errors,
 	)
@@ -151,9 +153,6 @@ class CandidateForm(forms.Form):
 		self.helper.add_input(Submit('go', '¡Adelante!'))
 
 	def save(self):
-		supporter = Supporter.objects.filter(csrf__iexact=self.data['csrfmiddlewaretoken'])
-		if not supporter:
-			raise forms.ValidationError('Error interno. Contacta con contacto@confederacionpirata.org.')
 		candidate = Candidate(
 			supporter = supporter[0],
 			phase = self.cleaned_data['phase'],
@@ -164,3 +163,8 @@ class CandidateForm(forms.Form):
 			photo = self.cleaned_data['photo'],
 		)
 		candidate.save()
+
+	def clean(self):
+		supporter = Supporter.objects.filter(csrf__iexact=self.data['csrfmiddlewaretoken'])
+		if not supporter:
+			raise forms.ValidationError('Error interno. Contacta con contacto@confederacionpirata.org.')
