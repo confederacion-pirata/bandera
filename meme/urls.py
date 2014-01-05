@@ -4,8 +4,8 @@ from meme import views
 
 urlpatterns = patterns('',
 	url(r'^$', views.index, name='index'),
-	url(r'^api/supporter', views.supporter, name='supporter'),
-	url(r'^api/candidate', views.candidate, name='candidate'),
+	url(r'^api/bandera/supporter', views.supporter, name='supporter'),
+	url(r'^api/bandera/candidate', views.candidate, name='candidate'),
 	url(r'^thanks$', views.thanks, name='thanks'),
 	url(r'^manifesto$', views.manifesto, name='manifesto'),
 	url(r'^privacy$', views.privacy, name='privacy'),
