@@ -105,3 +105,10 @@ STATIC_ROOT = os.path.abspath(os.path.join(
 # Crispy
 CRISPY_FAIL_SILENTLY = not DEBUG
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+try:
+    # custom settings is the file where you should set your modifications of the
+    # settings file
+    from custom_settings import *
+except:
+    pass
