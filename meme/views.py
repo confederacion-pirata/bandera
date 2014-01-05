@@ -19,7 +19,7 @@ def supporter(request):
 			send_confirmation_email()
 			return HttpResponseRedirect(get_thanks_destination())
 		return render(request, 'index.html', {'form': form})
-	return HttpResponseRedirect(reverse('index'))
+	return HttpResponseRedirect('http://piratas2014.eu/')
 
 def candidate(request):
 	form = CandidateForm()
