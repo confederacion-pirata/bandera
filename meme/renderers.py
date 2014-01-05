@@ -4,6 +4,7 @@ class HomeRenderer(StaticSiteRenderer):
 	def get_paths(self):
 		return frozenset([
 			"/",
+			"/thanks",
 		])
 
 renderers = [HomeRenderer, ]
