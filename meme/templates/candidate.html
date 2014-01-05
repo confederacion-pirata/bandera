@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}#SeBuscanPiratas - Primarias abiertas Elecciones Europeas 2014 | Confederación Pirata{% endblock %}
+{% block hero %}
+<p>Para ser candidato necesitamos saber algunas cosas más, ya que deberás ser apadrinado por <a href="http://confederacionpirata.org/quienes-somos/">un partido de la Confederación.</a></p>
+{% endblock %}
+{% block content %}
+{% crispy form %}
+{% endblock %}
