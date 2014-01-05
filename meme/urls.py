@@ -4,6 +4,7 @@ from meme import views
 
 urlpatterns = patterns('',
 	url(r'^$', views.index, name='index'),
+	url(r'^bandera/api/supporter/confirm/(?P<token>\w+)', views.confirm, name='confirm'),
 	url(r'^bandera/api/supporter', views.supporter, name='supporter'),
 	url(r'^bandera/api/candidate', views.candidate, name='candidate'),
 	url(r'^thanks$', views.thanks, name='thanks'),

@@ -11,14 +11,14 @@ class Supporter(models.Model):
 	ok_candidate = models.BooleanField()
 	ok_tos = models.BooleanField()
 	token = models.CharField(max_length=64)
-	csrf = models.CharField(max_length=64)
+	confirmed = models.BooleanField()
 	scanned_id = models.FileField(upload_to=build_upload_path)
 
 	def __unicode__(self):
 		return '%s (%s)' % (self.name, self.email)
 
 class Candidate(models.Model):
-	supporter = models.ForeignKey(Supporter)
+	supporter = models.ForeignKey('Supporter')
 	twitter = models.CharField(max_length=20)
 	facebook = models.URLField()
 	website = models.URLField()

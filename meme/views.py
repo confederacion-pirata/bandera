@@ -1,7 +1,10 @@
+# -*- coding: utf-8 -*-
 from django.shortcuts import render
+from django.template.loader import render_to_string
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
+from django.core.mail import send_mail
 from bandera import settings
 from forms import SupporterForm, CandidateForm
 from models import Supporter
@@ -13,26 +16,41 @@ def supporter(request):
 	if request.method == 'POST':
 		form = SupporterForm(request.POST, request.FILES)
 		if form.is_valid():
-			form.save()
+			supporter = form.save()
 			if form.cleaned_data['ok_candidate']:
-				return HttpResponseRedirect(get_candidate_destination())
-			send_confirmation_email()
+				return HttpResponseRedirect('%s?token=%s' % (reverse('candidate'), supporter.token))
+			send_confirmation_email(supporter)
 			return HttpResponseRedirect(get_thanks_destination())
 		return render(request, 'index.html', {'form': form})
 	return HttpResponseRedirect('http://piratas2014.eu/')
 
 def candidate(request):
 	form = CandidateForm()
+	token = None
 	if request.method == 'POST':
 		form = CandidateForm(request.POST, request.FILES)
 		if form.is_valid():
-			supporter = Supporter.objects.filter(csrf__iexact=form.data['csrfmiddlewaretoken'])
-			if not supporter:
-				raise PermissionDenied
-			form.save()
-			send_confirmation_email()
+			candidate = form.save()
+			send_confirmation_email(candidate.supporter)
 			return HttpResponseRedirect(get_thanks_destination())
+		token = form.data['token']
+	else:
+		token = request.GET.get('token')
+	if not token:
+		return PermissionDenied
+	form.set_token(token)
 	return render(request, 'candidate.html', {'form': form})
+
+def confirm(request, token = None):
+	if not token:
+		return PermissionDenied
+	supporter = Supporter.objects.filter(token__iexact=token)
+	if not supporter:
+		return PermissionDenied
+	data = supporter[0]
+	data.confirmed = True
+	data.save()
+	return render(request, 'confirm.html')
 
 def thanks(request):
 	return render(request, 'thanks.html', {})
@@ -42,13 +60,17 @@ def get_thanks_destination():
 		return reverse('thanks')
 	return 'http://piratas2014.eu/thanks'
 
-def get_candidate_destination():
-	if settings.DEBUG:
-		return reverse('candidate')
-	return 'http://piratas2014.eu/bandera/api/candidate'
-
-def send_confirmation_email():
-	pass
+def send_confirmation_email(supporter):
+	context = {
+		'token': supporter.token,
+	}
+	message = render_to_string('confirmation.txt', context)
+	send_mail(
+		'Confirmación #SeBuscanPiratas - Confederación Pirata',
+		message,
+		settings.DEFAULT_FROM_EMAIL,
+		[supporter.email]
+	)
 
 def manifesto():
 	pass
