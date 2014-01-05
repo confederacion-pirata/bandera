@@ -79,7 +79,7 @@ class SupporterForm(forms.Form):
 		if settings.DEBUG:
 			self.helper.form_action = 'supporter'
 		else:
-			self.helper.form_action = 'https://confederacionpirata.org/api/supporter'
+			self.helper.form_action = 'https://agora.confederacionpirata.org/api/supporter'
 		self.helper.form_enctype = 'multipart/form-data'
 		self.helper.add_input(Submit('go', '¡Adelante!'))
 
@@ -148,7 +148,7 @@ class CandidateForm(forms.Form):
 		if settings.DEBUG:
 			self.helper.form_action = 'candidate'
 		else:
-			self.helper.form_action = 'https://confederacionpirata.org/api/candidate'
+			self.helper.form_action = 'https://agora.confederacionpirata.org/api/candidate'
 		self.helper.form_enctype = 'multipart/form-data'
 		self.helper.add_input(Submit('go', '¡Adelante!'))
 
