@@ -24,7 +24,7 @@ class Supporter(models.Model):
 
 class Candidate(models.Model):
 	supporter = models.ForeignKey('Supporter')
-	twitter = models.CharField(max_length=20)
+	twitter = models.URLField()
 	facebook = models.URLField()
 	website = models.URLField()
 	bio = models.TextField()
