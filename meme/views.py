@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
+from django.views.decorators.cache import cache_page
 from django.template.loader import render_to_string
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
@@ -9,6 +10,7 @@ from bandera import settings
 from forms import SupporterForm, CandidateForm
 from models import Supporter
 
+@cache_page(60 * 15)
 def index(request):
 	return render(request, 'index.html', {'form': SupporterForm(), 'request': request})
 
@@ -54,9 +56,11 @@ def confirm(request, token = None):
 	data.save()
 	return render(request, 'confirm.html', {'request': request})
 
+@cache_page(60 * 15)
 def thanks(request):
 	return render(request, 'thanks.html', {'request': request})
 
+@cache_page(60 * 15)
 def calendar(request):
 	return render(request, 'calendar.html', {'request': request})
 
@@ -77,18 +81,23 @@ def send_confirmation_email(supporter):
 		[supporter.email]
 	)
 
+@cache_page(60 * 15)
 def manifesto(request):
 	return render(request, 'manifesto.html', {'request': request})
 
+@cache_page(60 * 15)
 def tos(request):
 	return render(request, 'tos.html', {'request': request})
 
+@cache_page(60 * 15)
 def ideas(request):
 	return render(request, 'ideas.html', {'request': request})
 
+@cache_page(60 * 15)
 def join_us(request):
 	return render(request, 'join_us.html', {'request': request})
 
+@cache_page(60 * 15)
 def document(request):
 	return render(request, 'ceep.html', {'request': request})
 
