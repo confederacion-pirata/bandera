@@ -78,13 +78,10 @@ def send_confirmation_email(supporter):
 	)
 
 def manifesto():
-	pass
-
-def privacy():
-	pass
+	return render(request, 'manifesto.html', {'request': request})
 
 def tos():
-	pass
+	return render(request, 'tos.html', {'request': request})
 
 def ideas(request):
 	return render(request, 'ideas.html', {'request': request})

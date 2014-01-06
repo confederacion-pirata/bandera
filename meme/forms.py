@@ -65,8 +65,8 @@ class SupporterForm(forms.Form):
 		error_messages=default_errors,
 	)
 	ok_tos = forms.BooleanField(
-		label = 'Acepto la <a href="/privacy">política de privacidad</a>, mi alta como simpatizante registrado de la Confederación Pirata y que mis datos sean transferidos al partido pirata de mi zona, si lo hay, para ser simpatizante de éste también (<a href="/tos">condiciones</a>).',
-		help_text = 'Para ejercer tus derechos LOPD contáctanos en <a href="http://confederacionpirata.org/contacto/">contacto@confederacionpirata.org</a>.',
+		label = 'Acepto la <a href="/tos">política de privacidad</a>, mi alta como simpatizante registrado de la Confederación Pirata y que mis datos sean transferidos al partido pirata de mi zona, si lo hay, para ser simpatizante de éste también (<a href="/tos">condiciones</a>).',
+		help_text = 'Para ejercer tus derechos reconocidos en la Ley Orgánica de Protección de Datos contáctanos en <a href="http://confederacionpirata.org/contacto/">contacto@confederacionpirata.org</a>.',
 		required = True,
 		error_messages=default_errors,
 	)
