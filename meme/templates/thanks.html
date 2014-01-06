@@ -1,12 +1,15 @@
 {% extends 'layout.html' %}
 
 {% block title %}#SeBuscanPiratas - Primarias abiertas Elecciones Europeas 2014 | Confederación Pirata{% endblock %}
+{% block menu %}
+{% include 'mm.html' %}
+{% endblock %}
 {% block hero %}
 <h1>¡Gracias!</h1>
 {% include 'social.html' %}
 {% endblock %}
 {% block content %}
-<p>Próximamente recibirás un correo que te permitirá acceder al sistema de votación. Si necesitamos más información, te contactaremos en el correo que nos has indicado.</p>
+<p>Ahora recibirás un correo de confirmación y, más adelante, otro que te permitirá acceder al sistema de votación. Si necesitamos más información, te contactaremos en el correo que nos has indicado.</p>
 <p>Para estar al día, síguenos en las redes sociales:</p>
 {% include 'accounts.html' %}
 <p>Muchas gracias,<br><a href="https://confederacionpirata.org">Confederación Pirata</a></p>

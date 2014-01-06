@@ -55,6 +55,9 @@ def confirm(request, token = None):
 def thanks(request):
 	return render(request, 'thanks.html', {'request': request})
 
+def calendar(request):
+	return render(request, 'calendar.html', {'request': request})
+
 def get_thanks_destination():
 	if settings.DEBUG:
 		return reverse('thanks')
