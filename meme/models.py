@@ -2,7 +2,12 @@ from django.db import models
 from bandera import settings
 
 def build_upload_path(instance, filename):
-	return '/'.join(['ids', instance.token, filename])
+	supporter = getattr(instance, 'supporter', None)
+	if not supporter:
+		token = instance.token
+	else:
+		token = supporter.token
+	return '/'.join(['ids', token, filename])
 
 class Supporter(models.Model):
 	name = models.CharField(max_length=140)
