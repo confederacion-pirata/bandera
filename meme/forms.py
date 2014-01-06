@@ -55,7 +55,7 @@ class SupporterForm(forms.Form):
 	)
 	scanned_id = forms.FileField(
 		label = 'DNI escaneado',
-		help_text = 'Adjunta tu DNI escaneado para comprobar tu identidad. Lo necesitamos para garantizar el buen funcionamiento de las votaciones.',
+		help_text = 'Adjunta tu DNI escaneado para comprobar tu identidad. Lo necesitamos para garantizar el buen funcionamiento de las votaciones (máx. 5MB).',
 		required = True,
 		error_messages=default_errors,
 	)
@@ -102,6 +102,14 @@ class SupporterForm(forms.Form):
 			raise forms.ValidationError('Correo ya registrado.')
 		return self.cleaned_data['email']
 
+	def clean_scanned_id(self):
+		image = self.cleaned_data.get('scanned_id', False)
+		if image:
+			if image._size > 6*1024*1024:
+				raise forms.ValidationError('Archivo demasiado grande (máximo: 5 MB).')
+		else:
+			raise forms.ValidationError('No puedo leer el archivo subido.')
+
 class CandidateForm(forms.Form):
 	phase = forms.ChoiceField(
 		label = 'Aspiro a...',
@@ -126,7 +134,7 @@ class CandidateForm(forms.Form):
 	)
 	photo = forms.FileField(
 		label = 'Fotografía',
-		help_text = 'Adjunta una fotografía donde se vea bien tu cara. Si no la subes ahora, se te pedirá más adelante.',
+		help_text = 'Adjunta una fotografía donde se vea bien tu cara. Si no la subes ahora, se te pedirá más adelante (máx. 5MB).',
 		required = False,
 		error_messages=default_errors,
 	)
@@ -184,3 +192,11 @@ class CandidateForm(forms.Form):
 		token = hashlib.md5(self.cleaned_data['email'] + settings.SECRET_KEY).hexdigest()
 		if token != self.data['token']:
 			raise forms.ValidationError('Esta no es la dirección que has introducido en el paso anterior. Introduce la correcta, por favor.')
+
+	def clean_photo(self):
+		image = self.cleaned_data.get('photo', False)
+		if image:
+			if image._size > 6*1024*1024:
+				raise forms.ValidationError('Archivo demasiado grande (máximo: 5 MB).')
+		else:
+			raise forms.ValidationError('No puedo leer el archivo subido.')
