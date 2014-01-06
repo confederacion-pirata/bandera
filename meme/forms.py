@@ -102,13 +102,13 @@ class SupporterForm(forms.Form):
 			raise forms.ValidationError('Correo ya registrado.')
 		return self.cleaned_data['email']
 
-	def clean_scanned_id(self):
-		image = self.cleaned_data.get('scanned_id', False)
-		if image:
-			if image._size > 6*1024*1024:
-				raise forms.ValidationError('Archivo demasiado grande (máximo: 5 MB).')
-		else:
-			raise forms.ValidationError('No puedo leer el archivo subido.')
+#	def clean_scanned_id(self):
+#		image = self.cleaned_data.get('scanned_id', False)
+#		if image:
+#			if image._size > 6*1024*1024:
+#				raise forms.ValidationError('Archivo demasiado grande (máximo: 5 MB).')
+#		else:
+#			raise forms.ValidationError('No puedo leer el archivo subido.')
 
 class CandidateForm(forms.Form):
 	phase = forms.ChoiceField(
@@ -193,10 +193,10 @@ class CandidateForm(forms.Form):
 		if token != self.data['token']:
 			raise forms.ValidationError('Esta no es la dirección que has introducido en el paso anterior. Introduce la correcta, por favor.')
 
-	def clean_photo(self):
-		image = self.cleaned_data.get('photo', False)
-		if image:
-			if image._size > 6*1024*1024:
-				raise forms.ValidationError('Archivo demasiado grande (máximo: 5 MB).')
-		else:
-			raise forms.ValidationError('No puedo leer el archivo subido.')
+#	def clean_photo(self):
+#		image = self.cleaned_data.get('photo', False)
+#		if image:
+#			if image._size > 6*1024*1024:
+#				raise forms.ValidationError('Archivo demasiado grande (máximo: 5 MB).')
+#		else:
+#			raise forms.ValidationError('No puedo leer el archivo subido.')
