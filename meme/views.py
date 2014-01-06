@@ -48,6 +48,8 @@ def confirm(request, token = None):
 	if not supporter:
 		return PermissionDenied
 	data = supporter[0]
+	if data.confirmed == True:
+		return HttpResponseRedirect(get_thanks_destination())
 	data.confirmed = True
 	data.save()
 	return render(request, 'confirm.html', {'request': request})
