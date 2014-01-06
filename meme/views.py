@@ -77,10 +77,10 @@ def send_confirmation_email(supporter):
 		[supporter.email]
 	)
 
-def manifesto():
+def manifesto(request):
 	return render(request, 'manifesto.html', {'request': request})
 
-def tos():
+def tos(request):
 	return render(request, 'tos.html', {'request': request})
 
 def ideas(request):
