@@ -86,11 +86,20 @@ def privacy():
 def tos():
 	pass
 
+def ideas(request):
+	return render(request, 'ideas.html', {'request': request})
+
+def join_us(request):
+	return render(request, 'join_us.html', {'request': request})
+
+def document(request):
+	return render(request, 'ceep.html', {'request': request})
+
 def custom_403():
-	return render(request, '403.html', {})
+	return render(request, '403.html', {'request': request})
 
 def custom_404():
-	return render(request, '404.html', {})
+	return render(request, '404.html', {'request': request})
 
 def custom_500():
-	return render(request, '500.html', {})
+	return render(request, '500.html', {'request': request})

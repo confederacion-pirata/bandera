@@ -12,6 +12,9 @@ urlpatterns = patterns('',
 	url(r'^manifesto$', views.manifesto, name='manifesto'),
 	url(r'^privacy$', views.privacy, name='privacy'),
 	url(r'^tos$', views.tos, name='tos'),
+	url(r'^ideas$', views.ideas, name='ideas'),
+	url(r'^join-us$', views.join_us, name='join_us'),
+	url(r'^ceep$', views.document, name='ceep'),
 )
 handler403 = 'meme.views.custom_403'
 handler404 = 'meme.views.custom_404'
