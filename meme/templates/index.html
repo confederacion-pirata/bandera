@@ -14,4 +14,19 @@
 {% block content %}
 <div class="alert alert-warning"><strong>Aviso para afiliados y simpatizantes ya registrados:</strong> si ya eres afiliado o simpatizante de <a href="/join-us">un partido pirata de la Confederación</a>, no necesitas registrarte. Si quieres ser candidato, ponte en contacto con tu partido.</div>
 {% crispy form %}
+<div id="ixsn" class="alert alert-info">
+<p>Síguenos en las redes sociales:</p>
+<a href="https://twitter.com/partidos_pirata" class="twitter-follow-button" data-show-count="false" data-lang="es">Síguenos en @partidos_pirata</a>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/es_ES/all.js#xfbml=1&appId=127140777389290";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href="https://www.facebook.com/ConfederacionPirata" data-width="300" data-layout="standard" data-action="like" data-show-faces="false" data-share="false"></div>
+<p>&nbsp;</p>
+{% include 'social.html' %}
+</div>
 {% endblock %}

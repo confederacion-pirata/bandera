@@ -5994,3 +5994,6 @@ body {
 #mm {
 	padding-bottom: 1em;
 }
+#ixsn .twitter-follow-button, #ixsn .fb-like {
+	float: left;
+}
