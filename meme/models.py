@@ -32,7 +32,7 @@ class Candidate(models.Model):
 	photo = models.FileField(upload_to=build_upload_path)
 
 	def __unicode__(self):
-		return '%s (%s)' % (self.supporter.name, self.supporter.email)
+		return '%s [%s]: %s' % (self.supporter.name, self.supporter.region, self.supporter.email)
 
 class MemberToken(models.Model):
 	token = models.CharField(max_length=40, unique=True)
