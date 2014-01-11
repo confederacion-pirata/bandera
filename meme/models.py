@@ -33,3 +33,9 @@ class Candidate(models.Model):
 
 	def __unicode__(self):
 		return '%s (%s)' % (self.supporter.name, self.supporter.email)
+
+class MemberToken(models.Model):
+	token = models.CharField(max_length=40)
+
+	def __unicode__(self):
+		return self.token

@@ -3,7 +3,7 @@ Hola pirata,
 
 Gracias por registrarte en las primarias europeas de la Confederación Pirata.
 
-https://agora.confederacionpirata.org/bandera/api/supporter/confirm/{{ token }}
+Para confirmar tu registro, haz click en este enlace: https://agora.confederacionpirata.org/bandera/api/supporter/confirm/{{ token }}
 
 Juntos construiremos una nueva Unión Europea al servicio de las personas. En los próximos días recibirás otro correo con un enlace para acceder al sistema seguro de votación.
 

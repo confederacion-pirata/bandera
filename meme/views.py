@@ -7,7 +7,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.core.mail import send_mail
 from bandera import settings
-from forms import SupporterForm, CandidateForm
+from forms import SupporterForm, CandidateForm, MemberCandidateForm
 from models import Supporter
 
 @cache_page(60 * 15)
@@ -42,6 +42,17 @@ def candidate(request):
 		return PermissionDenied
 	form.set_token(token)
 	return render(request, 'candidate.html', {'form': form, 'request': request})
+
+def member(request):
+	form = MemberCandidateForm()
+	if request.method == 'POST':
+		form = MemberCandidateForm(request.POST, request.FILES)
+		if form.is_valid():
+			candidate = form.save()
+			send_confirmation_email(candidate.supporter)
+			return HttpResponseRedirect(get_thanks_destination())
+	return render(request, 'member.html', {'form': form, 'request': request})
+
 
 def confirm(request, token = None):
 	if not token:
