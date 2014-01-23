@@ -1,0 +1,12 @@
+alter table meme_membertoken add constraint unique_membertoken_token unique (token);
+
+bandera=> CREATE TABLE aux_membertoken (
+    token character varying(40) NOT NULL
+);
+
+truncate aux_membertoken;
+\copy aux_membertoken from '/home/bandera/tokens/conf.txt' delimiter ',' csv;
+
+start transaction;
+insert into meme_membertoken(token) select token from aux_membertoken ;
+commit;

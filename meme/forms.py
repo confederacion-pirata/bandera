@@ -116,7 +116,7 @@ class CandidateForm(forms.Form):
 		label = 'Aspiro a...',
 		choices = (
 			('', 'Elije tu fase de participación'),
-			('1', 'una de las tres primeras posiciones'),
+			#('1', 'una de las tres primeras posiciones'),
 			('2', 'cualquier posición por debajo de las tres primeras'),
 		),
 		required = True,
