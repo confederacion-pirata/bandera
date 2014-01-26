@@ -86,6 +86,13 @@ MEDIA_ROOT = os.path.abspath(os.path.join(
     'upload'
 ))
 
+# Cache
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+    }
+}
+
 # Medusa
 MEDUSA_RENDERER_CLASS = "django_medusa.renderers.DiskStaticSiteRenderer"
 MEDUSA_MULTITHREAD = True

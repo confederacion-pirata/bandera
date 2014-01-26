@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+
+{% block title %}Candidatos | #SeBuscanPiratas - Primarias abiertas Elecciones Europeas 2014 | Confederación Pirata{% endblock %}
+{% block menu %}
+{% include 'mm.html' %}
+{% endblock %}
+{% block hero %}
+<h1>Candidatos</h1>
+<p>Estas las candidaturas para la primera fase de las primarias abiertas. La votación se iniciará el día 10 de febrero.</p>
+{% endblock %}
+{% block content %}
+<div class="alert alert-warning"><strong>Nota:</strong> estos son los candidatos para los tres primeros puestos. A partir del 10 de marzo se publicarán los de la segunda fase, para el resto de la lista.</div>
+<h2>Candidatos - Primera fase</h2>
+{% for c in candidates %}
+<a href="/candidates/{{c.id}}"><h3>{{c.supporter.name}}</h3></a>
+{% include 'ccard.html' %}
+{% endfor %}
+{% endblock %}

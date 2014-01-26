@@ -15,6 +15,8 @@ urlpatterns = patterns('',
 	url(r'^ideas$', views.ideas, name='ideas'),
 	url(r'^join-us$', views.join_us, name='join_us'),
 	url(r'^ceep$', views.document, name='ceep'),
+	url(r'^candidates/(?P<c_id>\d+)', views.candidate_page, name='candidate'),
+	url(r'^candidates$', views.candidates, name='candidates'),
 )
 handler403 = 'meme.views.custom_403'
 handler404 = 'meme.views.custom_404'

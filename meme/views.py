@@ -8,7 +8,8 @@ from django.http import HttpResponseRedirect
 from django.core.mail import send_mail
 from bandera import settings
 from forms import SupporterForm, CandidateForm, MemberCandidateForm
-from models import Supporter
+from models import Supporter, Candidate
+import random
 
 @cache_page(60 * 15)
 def index(request):
@@ -53,6 +54,19 @@ def member(request):
 			return HttpResponseRedirect(get_thanks_destination())
 	return render(request, 'member.html', {'form': form, 'request': request})
 
+@cache_page(60 * 15)
+def candidate_page(request, c_id):
+	candidate = Candidate.objects.get(pk=c_id)
+	if not candidate:
+		raise Http404
+	return render(request, 'candidate_page.html', {'request': request, 'c': candidate})
+
+@cache_page(60 * 15)
+def candidates(request):
+	cq = Candidate.objects.filter(phase__iexact=1)
+	candidates = [c for c in cq]
+	random.shuffle(candidates)
+	return render(request, 'candidates.html', {'request': request, 'candidates': candidates})
 
 def confirm(request, token = None):
 	if not token:

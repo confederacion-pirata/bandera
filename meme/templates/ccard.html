@@ -1,0 +1,7 @@
+{%  if c.bio %}<p>{{c.bio|linebreaks}}</p>{% endif %}
+<ul class="pagination">
+	<li><a href="/candidates/{{c.id}}">Pregunta al candidato</a></li>
+	{% if c.twitter %}<li><a href="{{c.twitter}}">Twitter</a></li>{% endif %}
+	{% if c.facebook %}<li><a href="{{c.facebook}}">Facebook</a></li>{% endif %}
+	{% if c.website %}<li><a href="{{c.website}}">Web</a></li>{% endif %}
+</ul>

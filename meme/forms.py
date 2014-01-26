@@ -62,7 +62,7 @@ class SupporterForm(forms.Form):
 		error_messages=default_errors,
 	)
 	ok_candidate = forms.BooleanField(
-		label = 'Quiero ser candidato y acepto que deberé ser avalado por un partido confederado (posteriormente a presentar mi candidatura), así como el <a href="/manifesto">manifesto del candidato</a>.',
+		label = 'Quiero ser candidato, para la segunda fase a partir del 10 de marzo, y acepto que deberé ser avalado por un partido confederado (posteriormente a presentar mi candidatura), así como el <a href="/manifesto">manifesto del candidato</a>.',
 		required = False,
 		error_messages=default_errors,
 	)
