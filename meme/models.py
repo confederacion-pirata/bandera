@@ -24,12 +24,12 @@ class Supporter(models.Model):
 
 class Candidate(models.Model):
 	supporter = models.ForeignKey('Supporter')
-	twitter = models.URLField()
-	facebook = models.URLField()
-	website = models.URLField()
+	twitter = models.URLField(blank=True)
+	facebook = models.URLField(blank=True)
+	website = models.URLField(blank=True)
 	bio = models.TextField()
 	phase = models.PositiveSmallIntegerField()
-	photo = models.FileField(upload_to=build_upload_path)
+	photo = models.FileField(upload_to=build_upload_path, blank=True)
 
 	def __unicode__(self):
 		return '%s [%s]: %s' % (self.supporter.name, self.supporter.region, self.supporter.email)
