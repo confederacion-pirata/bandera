@@ -15,10 +15,12 @@
 {% for c in candidates %}
 {% if c.photo %}
 <div class="row">
-<div class="col-sm-9 bio">
+<div class="col-sm-9">
 {% endif %}
 <a href="/candidates/{{c.id}}"><h3>{{c.supporter.name}}</h3></a>
+<div class="bio">
 {% include 'ccard.html' %}
+</div>
 {% if c.photo %}
 </div>
 <div class="col-sm-3 photo photo-bio-list hidden-xs">
