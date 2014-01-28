@@ -6004,3 +6004,10 @@ body {
 .photo {
 	text-align: right;
 }
+.bio {
+	text-align: justify !important;
+}
+.photo-bio-list {
+	padding-top: 3em;
+	text-align: center !important;
+}
