@@ -15,6 +15,29 @@ default_errors = {
     'invalid': 'Este campo contiene un valor inesperado.',
 }
 
+regions = (
+	('', 'Elige tu Comunidad Autónoma'),
+	('an', 'Andalucía'),
+	('ar', 'Aragón'),
+	('as', 'Asturias'),
+	('ca', 'Cantabria'),
+	('cl', 'Castilla y León'),
+	('cm', 'Castilla - La Mancha'),
+	('ct', 'Cataluña'),
+	('ce', 'Ceuta (Ciudad Autónoma)'),
+	('cv', 'Comunidad Valenciana'),
+	('ex', 'Extremadura'),
+	('ga', 'Galicia'),
+	('ib', 'Islas Baleares'),
+	('ic', 'Islas Canarias'),
+	('ri', 'La Rioja'),
+	('ma', 'Madrid'),
+	('me', 'Melilla (Ciudada Autónoma)'),
+	('mu', 'Murcia'),
+	('na', 'Navarra'),
+	('eu', 'País Vasco'),
+)
+
 class SupporterForm(forms.Form):
 	name = forms.CharField(
 		label = 'Nombre y apellidos',
@@ -30,28 +53,7 @@ class SupporterForm(forms.Form):
 	)
 	region = forms.ChoiceField(
 		label = 'Comunidad Autónoma',
-		choices = (
-			('', 'Elige tu Comunidad Autónoma'),
-			('an', 'Andalucía'),
-			('ar', 'Aragón'),
-			('as', 'Asturias'),
-			('ca', 'Cantabria'),
-			('cl', 'Castilla y León'),
-			('cm', 'Castilla - La Mancha'),
-			('ct', 'Cataluña'),
-			('ce', 'Ceuta (Ciudad Autónoma)'),
-			('cv', 'Comunidad Valenciana'),
-			('ex', 'Extremadura'),
-			('ga', 'Galicia'),
-			('ib', 'Islas Baleares'),
-			('ic', 'Islas Canarias'),
-			('ri', 'La Rioja'),
-			('ma', 'Madrid'),
-			('me', 'Melilla (Ciudada Autónoma)'),
-			('mu', 'Murcia'),
-			('na', 'Navarra'),
-			('eu', 'País Vasco'),
-		),
+		choices = regions,
 		required = True,
 		error_messages=default_errors,
 	)

@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.decorators.cache import cache_page
 from django.template.loader import render_to_string
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.core.mail import send_mail
 from bandera import settings
-from forms import SupporterForm, CandidateForm, MemberCandidateForm
+from forms import SupporterForm, CandidateForm, MemberCandidateForm, regions
 from models import Supporter, Candidate
 import random
 
@@ -56,10 +56,14 @@ def member(request):
 
 @cache_page(60 * 15)
 def candidate_page(request, c_id):
-	candidate = Candidate.objects.get(pk=c_id)
-	if not candidate:
+	candidate = get_object_or_404(Candidate, pk=c_id)
+	if candidate.phase != 2:
 		raise Http404
+	candidate.supporter.region = resolve_region_name(candidate.supporter.region)
 	return render(request, 'candidate_page.html', {'request': request, 'c': candidate})
+
+def resolve_region_name(region):
+	return [t[1] for t in regions if t[0] == region][0]
 
 def candidates(request):
 	cq = Candidate.objects.filter(phase__exact=1)
