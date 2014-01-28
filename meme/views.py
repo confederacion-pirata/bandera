@@ -10,6 +10,7 @@ from bandera import settings
 from forms import SupporterForm, CandidateForm, MemberCandidateForm, regions
 from models import Supporter, Candidate
 import random
+import os
 
 @cache_page(60 * 15)
 def index(request):
@@ -59,17 +60,29 @@ def candidate_page(request, c_id):
 	candidate = get_object_or_404(Candidate, pk=c_id)
 	if candidate.phase != 1:
 		raise Http404
-	candidate.supporter.region = resolve_region_name(candidate.supporter.region)
-	return render(request, 'candidate_page.html', {'request': request, 'c': candidate})
+	return render(request, 'candidate_page.html', {'request': request, 'c': fix_candidate(candidate)})
 
 def resolve_region_name(region):
 	return [t[1] for t in regions if t[0] == region][0]
 
 def candidates(request):
 	cq = Candidate.objects.filter(phase__exact=1)
-	candidates = [c for c in cq]
+	candidates = [fix_candidate(c) for c in cq]
 	random.shuffle(candidates)
 	return render(request, 'candidates.html', {'request': request, 'candidates': candidates})
+
+def fix_candidate(c):
+	c.supporter.region = resolve_region_name(c.supporter.region)
+	c.photo = None
+	photo = '%s.jpg' % c.pk
+	photo_path = os.path.abspath(os.path.join(
+		settings.STATIC_ROOT,
+		'photos',
+		photo
+	))
+	if os.path.isfile(photo_path):
+		c.photo = photo
+	return c
 
 def confirm(request, token = None):
 	if not token:

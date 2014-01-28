@@ -5983,6 +5983,10 @@ body {
 	#content .jumbotron {
 		font-size: 14px;
 	}
+	.photo {
+		text-align: left !important;
+		padding-top: 0.5em;
+	}
 }
 #accounts, #shareme {
 	text-align: center;
@@ -5996,4 +6000,7 @@ body {
 }
 #ixsn .twitter-follow-button, #ixsn .fb-like {
 	float: left;
+}
+.photo {
+	text-align: right;
 }
