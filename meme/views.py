@@ -57,7 +57,7 @@ def member(request):
 @cache_page(60 * 15)
 def candidate_page(request, c_id):
 	candidate = get_object_or_404(Candidate, pk=c_id)
-	if candidate.phase != 2:
+	if candidate.phase != 1:
 		raise Http404
 	candidate.supporter.region = resolve_region_name(candidate.supporter.region)
 	return render(request, 'candidate_page.html', {'request': request, 'c': candidate})
