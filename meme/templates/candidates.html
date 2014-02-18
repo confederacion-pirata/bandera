@@ -6,12 +6,13 @@
 {% endblock %}
 {% block hero %}
 <h1>Candidatos</h1>
-<p>Estas son las candidaturas para la primera fase de las primarias abiertas. La votación se iniciará el día 10 de febrero.</p>
-<p>Si quieres votar a tus candidatos favoritos, <a href="http://piratas2014.eu/">¡reg&iacute;strate!</a></p>
+<p>Próximamente se publicarán las candidaturas para la segunda fase de las primarias abiertas. La votación se iniciará el día 10 de marzo. Puedes consultar los candidatos de la primera fase <a href="https://agora.confederacionpirata.org/">aquí</a>.</p>
+<p>Si quieres votar, <a href="http://piratas2014.eu/">¡reg&iacute;strate!</a></p>
 {% endblock %}
 {% block content %}
-<div class="alert alert-warning"><strong>Nota:</strong> estos son los candidatos para los tres primeros puestos. A partir del 10 de marzo se publicarán los de la segunda fase, para el resto de la lista.</div>
+{% if phase == 1 %}
 <h2>Candidatos - Primera fase</h2>
+{% endif %}
 {% for c in candidates %}
 {% if c.photo %}
 <div class="row">

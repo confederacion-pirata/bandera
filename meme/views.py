@@ -58,7 +58,7 @@ def member(request):
 @cache_page(60 * 15)
 def candidate_page(request, c_id):
 	candidate = get_object_or_404(Candidate, pk=c_id)
-	if candidate.phase != 1:
+	if candidate.phase != 9:
 		raise Http404
 	return render(request, 'candidate_page.html', {'request': request, 'c': fix_candidate(candidate)})
 
@@ -66,10 +66,16 @@ def resolve_region_name(region):
 	return [t[1] for t in regions if t[0] == region][0]
 
 def candidates(request):
+	cq = Candidate.objects.filter(phase__exact=9)
+	candidates = [fix_candidate(c) for c in cq]
+	random.shuffle(candidates)
+	return render(request, 'candidates.html', {'request': request, 'candidates': candidates, 'phase': 9})
+
+def candidates_first(request):
 	cq = Candidate.objects.filter(phase__exact=1)
 	candidates = [fix_candidate(c) for c in cq]
 	random.shuffle(candidates)
-	return render(request, 'candidates.html', {'request': request, 'candidates': candidates})
+	return render(request, 'candidates.html', {'request': request, 'candidates': candidates, 'phase': 1})
 
 def fix_candidate(c):
 	c.supporter.region = resolve_region_name(c.supporter.region)
