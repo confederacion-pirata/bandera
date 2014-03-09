@@ -63,11 +63,11 @@ class SupporterForm(forms.Form):
 		required = True,
 		error_messages=default_errors,
 	)
-	ok_candidate = forms.BooleanField(
-		label = 'Quiero ser candidato, para la segunda fase a partir del 10 de marzo, y acepto que deberé ser avalado por un partido confederado (posteriormente a presentar mi candidatura), así como el <a href="/manifesto">manifesto del candidato</a>.',
-		required = False,
-		error_messages=default_errors,
-	)
+	#ok_candidate = forms.BooleanField(
+	#	label = 'Quiero ser candidato, para la segunda fase a partir del 10 de marzo, y acepto que deberé ser avalado por un partido confederado (posteriormente a presentar mi candidatura), así como el <a href="/manifesto">manifesto del candidato</a>.',
+	#	required = False,
+	#	error_messages=default_errors,
+	#)
 	ok_tos = forms.BooleanField(
 		label = 'Acepto la <a href="/tos">política de privacidad</a>, mi alta como simpatizante registrado de la Confederación Pirata y que mis datos sean transferidos al partido pirata de mi zona, si lo hay, para ser simpatizante de éste también (<a href="/tos">condiciones</a>).',
 		help_text = 'Para ejercer tus derechos reconocidos en la Ley Orgánica de Protección de Datos contáctanos en <a href="http://confederacionpirata.org/contacto/">contacto@confederacionpirata.org</a>.',
@@ -92,7 +92,7 @@ class SupporterForm(forms.Form):
 			name = self.cleaned_data['name'],
 			email = self.cleaned_data['email'],
 			region = self.cleaned_data['region'],
-			ok_candidate = self.cleaned_data['ok_candidate'],
+			ok_candidate = False,
 			ok_tos = self.cleaned_data['ok_tos'],
 			confirmed = False,
 			scanned_id = self.cleaned_data['scanned_id'],
