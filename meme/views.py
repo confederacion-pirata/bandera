@@ -69,7 +69,7 @@ def candidates(request):
 	cq = Candidate.objects.filter(phase__exact=9)
 	candidates = [fix_candidate(c) for c in cq]
 	random.shuffle(candidates)
-	return render(request, 'candidates.html', {'request': request, 'candidates': candidates, 'phase': 9})
+	return render(request, 'candidates.html', {'request': request, 'candidates': candidates, 'phase': 2})
 
 def candidates_first(request):
 	cq = Candidate.objects.filter(phase__exact=1)
