@@ -66,7 +66,7 @@ def resolve_region_name(region):
 	return [t[1] for t in regions if t[0] == region][0]
 
 def candidates(request):
-	cq = Candidate.objects.filter(phase__exact=2)
+	cq = Candidate.objects.filter(phase__lte=2)
 	candidates = [fix_candidate(c) for c in cq]
 	random.shuffle(candidates)
 	return render(request, 'candidates.html', {'request': request, 'candidates': candidates, 'phase': 2})
@@ -78,6 +78,8 @@ def candidates_first(request):
 	return render(request, 'candidates.html', {'request': request, 'candidates': candidates, 'phase': 1})
 
 def fix_candidate(c):
+	if c.id == 18 or c.id == 22 or c.id == 42:
+		return None
 	c.supporter.region = resolve_region_name(c.supporter.region)
 	c.photo = None
 	photo = '%s.jpg' % c.pk
