@@ -6,7 +6,7 @@
 {% endblock %}
 {% block hero %}
 <h1>Candidatos</h1>
-<p>Próximamente se publicarán las candidaturas para la segunda fase de las primarias abiertas. La votación se iniciará el día 17 de marzo. Puedes consultar los candidatos de la primera fase <a href="https://agora.confederacionpirata.org/">aquí</a>.</p>
+<p>{% if phase == 1 %}<a href="/candidates">Aquí encontrarás</a>{% else %}Estas son{% endif %} las candidaturas para la segunda fase de las primarias abiertas. La votación se iniciará el día 17 de marzo. Puedes consultar los candidatos de la primera fase <a href="https://agora.confederacionpirata.org/">aquí</a>.</p>
 {% endblock %}
 {% block content %}
 {% if phase == 1 %}

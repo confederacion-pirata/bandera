@@ -66,7 +66,7 @@ def resolve_region_name(region):
 	return [t[1] for t in regions if t[0] == region][0]
 
 def candidates(request):
-	cq = Candidate.objects.filter(phase__exact=9)
+	cq = Candidate.objects.filter(phase__exact=2)
 	candidates = [fix_candidate(c) for c in cq]
 	random.shuffle(candidates)
 	return render(request, 'candidates.html', {'request': request, 'candidates': candidates, 'phase': 2})
