@@ -75,7 +75,7 @@ def candidates_json(request):
 			next
 		photo = ''
 		if c.photo:
-			photo = c.photo
+			photo = c.photo.url
 		cc = { 'a': 'ballot/answer', 'value': c.supporter.name, 'details': c.bio, 'details_title': 'Presentación y motivos', 'media_url': photo }
 		cc['urls'] = []
 		add_url_to_candidate(cc, 'Preguntas', 'http://piratas2014.eu/candidates/%d' % c.id)
