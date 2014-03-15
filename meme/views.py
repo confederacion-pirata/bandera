@@ -4,13 +4,14 @@ from django.views.decorators.cache import cache_page
 from django.template.loader import render_to_string
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.core.mail import send_mail
 from bandera import settings
 from forms import SupporterForm, CandidateForm, MemberCandidateForm, regions
 from models import Supporter, Candidate
 import random
 import os
+import json
 
 @cache_page(60 * 15)
 def index(request):
@@ -65,9 +66,29 @@ def candidate_page(request, c_id):
 def resolve_region_name(region):
 	return [t[1] for t in regions if t[0] == region][0]
 
+def candidates_json(request):
+	cq = Candidate.objects.filter(phase__lte=2)
+	candidates = [fix_and_filter_candidate(c) for c in cq]
+	m = []
+	for c in candidates:
+		photo = ''
+		if c.photo:
+			photo = c.photo
+		cc = { 'a': 'ballot/answer', 'value': c.supporter.name, 'details': c.bio, 'details_title': 'Presentación y motivos', 'media_url': photo }
+		cc['urls'] = []
+		add_url_to_candidate(cc, 'Preguntas', 'http://piratas2014.eu/candidates/%d' % c.id)
+		add_url_to_candidate(cc, 'Twitter', c.twitter)
+		add_url_to_candidate(cc, 'Facebook', c.facebook)
+		add_url_to_candidate(cc, 'Web', c.website)
+		m.append(cc)
+	return HttpResponse(json.dumps(m), content_type="application/json")
+
+def add_url_to_candidate(cc, title, url):
+	cc['urls'].append({title: url})
+
 def candidates(request):
 	cq = Candidate.objects.filter(phase__lte=2)
-	candidates = [fix_candidate(c) for c in cq]
+	candidates = [fix_and_filter_candidate(c) for c in cq]
 	random.shuffle(candidates)
 	return render(request, 'candidates.html', {'request': request, 'candidates': candidates, 'phase': 2})
 
@@ -77,9 +98,12 @@ def candidates_first(request):
 	random.shuffle(candidates)
 	return render(request, 'candidates.html', {'request': request, 'candidates': candidates, 'phase': 1})
 
-def fix_candidate(c):
+def fix_and_filter_candidate(c):
 	if c.id == 18 or c.id == 22 or c.id == 42:
 		return None
+	return fix_candidate(c)
+
+def fix_candidate(c):
 	c.supporter.region = resolve_region_name(c.supporter.region)
 	c.photo = None
 	photo = '%s.jpg' % c.pk
