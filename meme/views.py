@@ -71,6 +71,8 @@ def candidates_json(request):
 	candidates = [fix_and_filter_candidate(c) for c in cq]
 	m = []
 	for c in candidates:
+		if c == None:
+			next
 		photo = ''
 		if c.photo:
 			photo = c.photo
