@@ -86,7 +86,7 @@ def candidates_json(request):
 	return HttpResponse(json.dumps(m), content_type="application/json")
 
 def add_url_to_candidate(cc, title, url):
-	cc['urls'].append({title: url})
+	cc['urls'].append({"title": title, "url": url})
 
 def candidates(request):
 	cq = Candidate.objects.filter(phase__lte=2)
