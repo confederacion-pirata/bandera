@@ -17,7 +17,7 @@ urlpatterns = patterns('',
 	url(r'^join-us$', views.join_us, name='join_us'),
 	url(r'^ceep$', views.document, name='ceep'),
 	url(r'^candidates/(?P<c_id>\d+)', views.candidate_page, name='candidate'),
-	url(r'^candidates$', views.candidates, name='candidates'),
+	url(r'^candidates$', RedirectView.as_view(url='https://confederacionpirata.org/lista-ep2014/', permanent=True), name='candidates'),
 	url(r'^candidates/first$', views.candidates_first, name='candidates_first'),
 )
 handler403 = 'meme.views.custom_403'
